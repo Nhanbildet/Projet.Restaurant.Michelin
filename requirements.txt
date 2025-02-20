@@ -1,8 +1,6 @@
 streamlit
 pandas
 requests
-ast
-urllib.parse
 folium
 streamlit_folium 
 google.generativeai 
