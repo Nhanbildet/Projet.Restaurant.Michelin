@@ -87,7 +87,7 @@ def display(df):
         st.image(image, caption= marque)
     with col2:
         st.write(des)
-    API_KEY = "AIzaSyBejG-xOzeM7CUOI23TVkwg1CjTiXu235E"  
+    API_KEY = API_KEY
     url = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
     params = {
         "input": Nom.strip(),
@@ -139,7 +139,7 @@ def display(df):
 # creer fonction avec chat box Gemini
 def chatGemini(session_key ="default" ):
 
-    genai.configure(api_key="AIzaSyDhdpdEjsX7f6AE325IIIEitDbWgsc363g")
+    genai.configure(api_key=api_key )
 
     model = genai.GenerativeModel("gemini-pro")
 
@@ -258,62 +258,4 @@ else:
         st.write('👉 "Sélectionnez votre ville pour obtenir la liste des restaurants disponibles')
         
         #st.markdown("<hr style='border: 0.3px solid white;'>", unsafe_allow_html=True)
-
-import streamlit as st
-import google.generativeai as genai
-
-def chatGemini(session_key="default"):
-    """Chatbot Gemini fonctionnant avec une session unique."""
-    
-    # Configurer l'API Gemini
-    genai.configure(api_key="TA_CLE_API")  # Remplace par ta clé API
-
-    model = genai.GenerativeModel("gemini-pro")
-
-    # Initialiser l'historique des messages pour cette session spécifique
-    if session_key not in st.session_state:
-        st.session_state[session_key] = {"messages": []}
-    # Bouton de réinitialisation du chat
-    if st.button("🔄 Réinitialiser le chat"):
-        st.session_state[session_key]["messages"] = []
-        st.rerun()  # Recharge la page
-
-    # Affichage des messages
-    for msg in st.session_state[session_key]["messages"]:
-        with st.chat_message(msg["role"]):
-            st.markdown(msg["content"])
-
-    # Entrée utilisateur (⚠ appelée une seule fois !)
-    prompt = st.chat_input("Posez vos questions à un expert des restaurants Michelin ...")
-
-    if prompt:
-        # Ajouter le message utilisateur
-        st.session_state[session_key]["messages"].append({"role": "user", "content": prompt})
-        with st.chat_message("user"):
-            st.markdown(prompt)
-
-        try:
-            # Générer la réponse avec Gemini
-            response = model.generate_content(prompt)
-            reply = response.text if response else "Je n'ai pas compris votre question."
-
-        except Exception as e:
-            reply = f"Erreur : {e}"  # Gestion d'erreur
-
-        # Ajouter la réponse du chatbot
-        st.session_state[session_key]["messages"].append({"role": "assistant", "content": reply})
-        with st.chat_message("assistant"):
-            st.markdown(reply)
-
-    # Bouton pour quitter l'application
-    st.markdown("""
-        <script>
-        function closeWindow() {
-            window.close();
-        }
-        </script>
-        <button onclick="closeWindow()">❌ Quitter</button>
-    """, unsafe_allow_html=True)
-
- 
 
