@@ -88,7 +88,7 @@ def display(df):
         st.image(image, caption= marque)
     with col2:
         st.write(des)
-    API_KEY = "AIzaSyBejG-xOzeM7CUOI23TVkwg1CjTiXu235E" 
+    API_KEY = API_KEY
     url = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
     params = {
         "input": Nom.strip(),
@@ -140,7 +140,7 @@ def display(df):
 # creer fonction avec chat box Gemini
 def chatGemini(session_key ="default" ):
 
-    genai.configure(api_key="AIzaSyDhdpdEjsX7f6AE325IIIEitDbWgsc363g")
+    genai.configure(api_key=api_key)
 
     model = genai.GenerativeModel("gemini-pro")
 
