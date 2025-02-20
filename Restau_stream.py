@@ -140,7 +140,6 @@ def display(df):
 def chatGemini(session_key ="default" ):
 
     genai.configure(api_key=api_key )
-
     model = genai.GenerativeModel("gemini-pro")
 
     # Initialiser l'historique des messages pour cette session spécifique
@@ -251,7 +250,7 @@ if ville:
             chatGemini(session_key="chat4")
     with tab5:
         st.image('chatavecmoi.png')
-        chatGemini(session_key="chat5")
+        #chatGemini(session_key="chat5")
 else:
         st.write('👉 "Sélectionnez votre ville pour obtenir la liste des restaurants disponibles')
         
