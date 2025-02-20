@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd 
 import requests
 import ast
-import urllib.parse
 import folium
 from streamlit_folium import st_folium
 import google.generativeai as genai
@@ -89,7 +88,7 @@ def display(df):
         st.image(image, caption= marque)
     with col2:
         st.write(des)
-    API_KEY = "AIzaSyBz7cuhztAWdpTSSTm_1hsV-oY1sDSG5aQ" 
+    API_KEY = "AIzaSyBejG-xOzeM7CUOI23TVkwg1CjTiXu235E" 
     url = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
     params = {
         "input": Nom.strip(),
