@@ -140,9 +140,7 @@ def display(df):
 def chatGemini(session_key ="default" ):
     api_key = st.secrets["api_key"]
     genai.configure(api_key= api_key)
-
     model = genai.GenerativeModel("gemini-pro")
-
     # Initialiser l'historique des messages pour cette session spécifique
     if session_key not in st.session_state:
         st.session_state[session_key] = {"messages": []}
@@ -195,10 +193,8 @@ if ville:
         list_cuisine =sorted(df_selected['Façon Cuisine'].str.split(',').explode().unique())
         cuisine = st.selectbox('Choisissez le mode de cuisson:', list_cuisine, index= None)
         if cuisine:
-            df_selected = df_selected.loc[df_selected['Façon Cuisine'].str.contains(cuisine)]      
-     
+            df_selected = df_selected.loc[df_selected['Façon Cuisine'].str.contains(cuisine)]       
     st.write(f'Vous cherchez un restaurant à {ville}')
-    st.markdown("<hr style='border: 0.3px solid white;'>", unsafe_allow_html=True) 
     tab1, tab2, tab3, tab4, tab5= st.tabs( ["Trois étoiles'", "Deux étoiles", "Une étoile","Cuisine Gourmande", "Chat avec moi"])
     with tab1:  
         if not df_selected.loc[df_selected['etoile'] == "Trois étoiles"].empty:
