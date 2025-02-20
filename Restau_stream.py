@@ -87,7 +87,7 @@ def display(df):
         st.image(image, caption= marque)
     with col2:
         st.write(des)
-    API_KEY = {API_KEY}
+    API_KEY = API_KEY
     url = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
     params = {
         "input": Nom.strip(),
@@ -139,7 +139,8 @@ def display(df):
 # creer fonction avec chat box Gemini
 def chatGemini(session_key ="default" ):
 
-    genai.configure(api_key= {api_key} )
+    genai.configure(api_key= api_key)
+
     model = genai.GenerativeModel("gemini-pro")
 
     # Initialiser l'historique des messages pour cette session spécifique
@@ -154,6 +155,8 @@ def chatGemini(session_key ="default" ):
     for msg in st.session_state[session_key]["messages"]:
         with st.chat_message(msg["role"]):
             st.markdown(msg["content"])
+    
+    # Entrée utilisateur (⚠ appelée une seule fois !)
     prompt = st.chat_input("Posez vos questions à un expert des restaurants Michelin ...", key=f"chat_input_{session_key}")
 
     if prompt:
@@ -250,9 +253,8 @@ if ville:
             chatGemini(session_key="chat4")
     with tab5:
         st.image('chatavecmoi.png')
-        #chatGemini(session_key="chat5")
+        chatGemini(session_key="chat5")
 else:
         st.write('👉 "Sélectionnez votre ville pour obtenir la liste des restaurants disponibles')
         
-        #st.markdown("<hr style='border: 0.3px solid white;'>", unsafe_allow_html=True)
 
