@@ -155,8 +155,6 @@ def chatGemini(session_key ="default" ):
     for msg in st.session_state[session_key]["messages"]:
         with st.chat_message(msg["role"]):
             st.markdown(msg["content"])
-    
-    # Entrée utilisateur (⚠ appelée une seule fois !)
     prompt = st.chat_input("Posez vos questions à un expert des restaurants Michelin ...", key=f"chat_input_{session_key}")
 
     if prompt:
